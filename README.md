@@ -1,5 +1,13 @@
 # search-react-input
 
+# Installation
+
+To install search-react-input, in your terminal, run the command
+
+```
+npm i search-react-input
+```
+
 ## Example
 
 ```javascript
@@ -52,7 +60,7 @@ export default App;
 
 ## Styles
 
-search-react-input comes with default styles that can be overrideden by the creation of a new css files. Classnames for the respective jsx elements can be found in the github repository.
+search-react-input comes with default styles that can be overridden by the creation of a new css files. Classnames for the respective jsx elements can be found in the github repository.
 
 ## License
 
