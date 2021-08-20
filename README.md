@@ -1,6 +1,6 @@
-#search-react-input
+# search-react-input
 
-##Example
+## Example
 
 ```javascript
 import React from "react";
@@ -37,7 +37,7 @@ function App() {
 export default App;
 ```
 
-##Props
+## Props
 
 - `options` - an array of label, value objects that the search bar filters through
 - `onChange(e, option)` - a function that returns the event and the selected option
@@ -50,8 +50,10 @@ export default App;
 - `font` - specifies the font, default is "Georama"
 - `caseSensitive` - specifies whether or not the search filter takes into account the case of characters, default is false
 
-##Styles
+## Styles
+
 search-react-input comes with default styles that can be overrideden by the creation of a new css files. Classnames for the respective jsx elements can be found in the github repository.
 
-##License
+## License
+
 MIT Licensed. Copyright (c) Malachi Ashley 2021.
