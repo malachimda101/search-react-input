@@ -1,8 +1,12 @@
 # search-react-input
 
+# About
+
+The motivation for making search-react-input came when I was practicing my full-stack development skills and I couldn't find a pre-made search bar for my react frontend that looked clean, was customizable, and worked to my likings. I decided to make one myself and this is the result. The component is modeled after the search bar's of Google and Reddit and make it incredibly easy to dynamically render routes or capture the search term.
+
 # Installation
 
-To install search-react-input, in your terminal, run the command
+To install search-react-input run the following command in your terminal.
 
 ```
 npm i search-react-input
@@ -13,24 +17,32 @@ npm i search-react-input
 ```javascript
 import React from "react";
 import { useState } from "react";
-import countries from "./countries";
 import Search from "search-box-react";
 
-const options = [];
-countries.map((country) =>
-  options.push({ label: country.name, value: country.code })
-);
+const countries = [
+  { label: "Madagascar", value: "MG" },
+  { label: "Malawi", value: "MW" },
+  { label: "Malaysia", value: "MY" },
+  { label: "Maldives", value: "MV" },
+  { label: "Mali", value: "ML" },
+  { label: "Malta", value: "MT" },
+  { label: "Marshall Islands", value: "MH" },
+  { label: "Martinique", value: "MQ" },
+  { label: "Mauritania", value: "MR" },
+  { label: "Mauritius", value: "MU" },
+  { label: "Mayotte", value: "YT" },
+  { label: "Mexico", value: "MX" },
+];
 
 function App() {
-  // const [searchTerm, setSearchTerm] = useState("");
   const [capturedSearch, setCapturedSearch] = useState(null);
 
   return (
     <div className="App">
       <div className="container">
         <Search
-          options={options}
-          onChange={(e, option) => setCapturedSearch(option)}
+          options={countries}
+          onChange={(option, e) => setCapturedSearch(option)}
         />
       </div>
       <div style={{ marginTop: "5vh" }} className="hello">
@@ -48,7 +60,7 @@ export default App;
 ## Props
 
 - `options` - an array of label, value objects that the search bar filters through
-- `onChange(e, option)` - a function that returns the event and the selected option
+- `onChange(option, e)` - a function that returns the event and the selected option, if the option isn't in the option list, option.value is null
 - `placeholder` - default text for the search bar, default is "Search"
 - `className` - apply a className to the input container, default is "search-bar-container"
 - `width` - specify a width for the search bar and the dropdown list, must be a string, default is "50vw"

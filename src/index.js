@@ -53,8 +53,8 @@ const Search = ({
     } else if (e.key === "Enter") {
       let newOption = { label: searchTerm, value: null };
       cursor > -1
-        ? onChange(e, filteredOptions[cursor])
-        : onChange(e, newOption);
+        ? onChange(filteredOptions[cursor], e)
+        : onChange(newOption, e);
       setSearchTerm("");
       setTempSearchTerm("");
       setDisplayDropdown(false);
@@ -65,7 +65,7 @@ const Search = ({
     setSearchTerm("");
     setTempSearchTerm("");
     let selected = { label: e.target.innerHTML, value: e.target.id };
-    onChange(e, selected);
+    onChange(selected, e);
     setDisplayDropdown(false);
   }
 
