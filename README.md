@@ -2,7 +2,7 @@
 
 # About
 
-The motivation for making search-react-input came when I was practicing my full-stack development skills and I couldn't find a pre-made search bar for my react frontend that looked clean, was customizable, and worked to my likings. I decided to make one myself and this is the result. The component is modeled after the search bar's of Google and Reddit and make it incredibly easy to dynamically render routes or capture the search term.
+The motivation for making search-react-input came when I was practicing my full-stack development skills and I couldn't find a pre-made search bar for my react frontend that looked clean, was customizable, and worked to my likings. I decided to make one myself and this is the result. The component is modeled after the search bar's of Google and Reddit and makes it incredibly easy to dynamically render routes or capture the search term.
 
 # Installation
 
@@ -60,7 +60,7 @@ export default App;
 ## Props
 
 - `options` - an array of label, value objects that the search bar filters through
-- `onChange(option, e)` - a function that returns the event and the selected option, if the option isn't in the option list, option.value is null
+- `onChange(option, e)` - a function that returns the event and the selected option. If the option selected isn't in the option list, option.value will be null
 - `placeholder` - default text for the search bar, default is "Search"
 - `className` - apply a className to the input container, default is "search-bar-container"
 - `width` - specify a width for the search bar and the dropdown list, must be a string, default is "50vw"
