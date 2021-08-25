@@ -2,7 +2,7 @@
 
 # About
 
-The motivation for making search-react-input came when I was practicing my full-stack development skills and I couldn't find a pre-made search bar for my react frontend that looked clean, was customizable, and worked to my likings. I decided to make one myself and this is the result. The component is modeled after the search bar's of Google and Reddit and makes it incredibly easy to dynamically render routes or capture the search term.
+The motivation for making search-react-input came when I couldn't find a pre-made search bar for react that looked clean, was customizable, and worked well. I decided to make one myself and this is the result. The component is modeled after the search bar's of Google and Reddit and makes it incredibly easy to dynamically render routes, capture the search term, or anything else you'd like to do.
 
 # Installation
 
@@ -11,6 +11,10 @@ To install search-react-input run the following command in your terminal.
 ```
 npm i search-react-input
 ```
+
+## Demo
+
+https://codesandbox.io/s/search-react-input-demo-wkhj5
 
 ## Example
 
