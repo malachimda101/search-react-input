@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "./search.css";
 import { ClickOutsideSearch, filterOptions } from "./utils";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Search = ({
   options,
@@ -19,7 +20,8 @@ const Search = ({
   const [searchTerm, setSearchTerm] = useState("");
   const searchRef = useRef(null);
   const [tempSearchTerm, setTempSearchTerm] = useState("");
-  const [cursor, setCursor] = useState(-1);
+  const [keyCursor, setKeyCursor] = useState(-1);
+  const [mouseCursor, setMouseCursor] = useState(-1);
   const [displayDropdown, setDisplayDropdown] = useState(
     searchTerm.length > 0 ? true : false
   );
@@ -32,29 +34,30 @@ const Search = ({
       : setDisplayDropdown(false);
     tempSearchTerm.length > 0 && setTempSearchTerm("");
     setSearchTerm(e.target.value);
-    setCursor(-1);
+    setKeyCursor(-1);
+    setMouseCursor(-1);
   }
 
   function handleKeyPress(e) {
     if (e.key === "ArrowUp") {
       e.preventDefault();
-      cursor > 0
-        ? setTempSearchTerm(filteredOptions[cursor - 1].label)
+      keyCursor > 0
+        ? setTempSearchTerm(filteredOptions[keyCursor - 1].label)
         : setTempSearchTerm("");
-      cursor > -1 && setCursor((cursor) => cursor - 1);
+      keyCursor > -1 && setKeyCursor((keyCursor) => keyCursor - 1);
     } else if (
       e.key === "ArrowDown" &&
-      cursor < filteredOptions.length - 1 &&
-      cursor < 4
+      keyCursor < filteredOptions.length - 1 &&
+      keyCursor < 4
     ) {
       e.preventDefault();
-      setTempSearchTerm(filteredOptions[cursor + 1].label);
-      setCursor((cursor) => cursor + 1);
+      setTempSearchTerm(filteredOptions[keyCursor + 1].label);
+      setKeyCursor((keyCursor) => keyCursor + 1);
     } else if (e.key === "Enter") {
       let newOption = { label: searchTerm, value: null };
-      cursor > -1
-        ? onChange(filteredOptions[cursor], e)
-        : onChange(newOption, e);
+      keyCursor > -1
+        ? onChange(filteredOptions[keyCursor], e.key)
+        : onChange(newOption, e.key);
       setSearchTerm("");
       setTempSearchTerm("");
       setDisplayDropdown(false);
@@ -64,13 +67,29 @@ const Search = ({
   function handleSearchClick(e) {
     setSearchTerm("");
     setTempSearchTerm("");
-    let selected = { label: e.target.innerHTML, value: e.target.id };
-    onChange(selected, e);
+    let selected = filteredOptions[e.target.id];
+    onChange(selected, "Click");
     setDisplayDropdown(false);
   }
 
+  const handleIconClick = () => {
+    let newOption = { label: searchTerm, value: null };
+    onChange(newOption, "Icon");
+    setSearchTerm("");
+    setTempSearchTerm("");
+    setDisplayDropdown(false);
+  };
+
+  const handleMouseEnter = (e) => {
+    let selected = filteredOptions[e.target.id];
+    setTempSearchTerm(selected.label);
+    console.log(e);
+    setMouseCursor(Number(e.target.id));
+    setKeyCursor(Number(e.target.id));
+  };
+
   return (
-    <div className={className} ref={searchRef}>
+    <div className={className} ref={searchRef} style={{ width: width }}>
       <input
         style={{ width: width, font: font }}
         className={inputClassName}
@@ -80,6 +99,26 @@ const Search = ({
         onKeyDown={(e) => handleKeyPress(e)}
         spellCheck={spellCheck}
       />
+      <div
+        className="icon-contaier"
+        style={{
+          width: width,
+          flex: 1,
+          display: "flex",
+          justifyContent: "flex-start",
+          paddingRight: "20px",
+        }}
+      >
+        <AiOutlineSearch
+          style={{
+            width: "25px",
+            height: "25px",
+            zIndex: 15,
+            cursor: "pointer",
+          }}
+          onClick={handleIconClick}
+        />
+      </div>
       {filteredOptions.length !== 0 &&
       searchTerm.length !== 0 &&
       displayDropdown ? (
@@ -93,20 +132,20 @@ const Search = ({
                 idx < 5 && (
                   <li
                     style={
-                      cursor === idx
+                      keyCursor === idx || mouseCursor === idx
                         ? { background: hoverColor }
                         : { background: "white" }
                     }
                     className={
-                      cursor === idx
+                      keyCursor === idx || mouseCursor === idx
                         ? "search-list-item-active"
                         : "search-list-item"
                     }
                     key={idx}
-                    id={option.value}
+                    id={idx}
                     onClick={(e) => handleSearchClick(e)}
-                    onMouseEnter={() => setCursor(idx)}
-                    onMouseLeave={() => setCursor(-1)}
+                    onMouseEnter={(e) => handleMouseEnter(e)}
+                    onMouseLeave={() => setMouseCursor(-1)}
                   >
                     {option.label}
                   </li>

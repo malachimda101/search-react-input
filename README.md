@@ -9,7 +9,7 @@ The motivation for making search-react-input came when I couldn't find a pre-mad
 To install search-react-input run the following command in your terminal.
 
 ```
-npm i search-react-input
+npm install search-react-input --save
 ```
 
 ## Demo
@@ -21,7 +21,7 @@ https://codesandbox.io/s/search-react-input-demo-wkhj5
 ```javascript
 import React from "react";
 import { useState } from "react";
-import Search from "search-box-react";
+import Search from "search-react-input";
 
 const countries = [
   { label: "Madagascar", value: "MG" },
@@ -38,25 +38,28 @@ const countries = [
   { label: "Mexico", value: "MX" },
 ];
 
-function App() {
+const App = () => {
   const [capturedSearch, setCapturedSearch] = useState(null);
 
   return (
     <div className="App">
-      <div className="container">
+      <div
+        className="container"
+        style={{ marginTop: "5vh", display: "flex", justifyContent: "center" }}
+      >
         <Search
           options={countries}
           onChange={(option, e) => setCapturedSearch(option)}
         />
       </div>
-      <div style={{ marginTop: "5vh" }} className="hello">
+      <div style={{ marginTop: "25vh", textAlign: "center" }}>
         <h1>
           {capturedSearch && "Hello and welcome to " + capturedSearch.label}
         </h1>
       </div>
     </div>
   );
-}
+};
 
 export default App;
 ```
