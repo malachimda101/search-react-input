@@ -5,7 +5,7 @@
 
 .search-bar {
   font-size: 22px;
-  padding-left: 40px;
+  padding-left: 20px;
   height: 5vh;
   position: absolute;
   display: flex;
@@ -24,7 +24,7 @@
   z-index: 10;
   background: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  margin-top: 1.5vh;
+  margin-top: 3vh;
 }
 
 .search-list-item {

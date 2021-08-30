@@ -3,7 +3,6 @@ import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "./search.css";
 import { ClickOutsideSearch, filterOptions } from "./utils";
-import { AiOutlineSearch } from "react-icons/ai";
 
 const Search = ({
   options,
@@ -28,7 +27,7 @@ const Search = ({
   ClickOutsideSearch(searchRef, setDisplayDropdown);
   const filteredOptions = filterOptions(options, searchTerm, caseSensitive);
 
-  function handleSearchBarChange(e) {
+  const handleSearchBarChange = (e) => {
     e.target.value.length > 0
       ? setDisplayDropdown(true)
       : setDisplayDropdown(false);
@@ -36,9 +35,9 @@ const Search = ({
     setSearchTerm(e.target.value);
     setKeyCursor(-1);
     setMouseCursor(-1);
-  }
+  };
 
-  function handleKeyPress(e) {
+  const handleKeyPress = (e) => {
     if (e.key === "ArrowUp") {
       e.preventDefault();
       keyCursor > 0
@@ -62,21 +61,13 @@ const Search = ({
       setTempSearchTerm("");
       setDisplayDropdown(false);
     }
-  }
+  };
 
-  function handleSearchClick(e) {
+  const handleSearchClick = (e) => {
     setSearchTerm("");
     setTempSearchTerm("");
     let selected = filteredOptions[e.target.id];
     onChange(selected, "Click");
-    setDisplayDropdown(false);
-  }
-
-  const handleIconClick = () => {
-    let newOption = { label: searchTerm, value: null };
-    onChange(newOption, "Icon");
-    setSearchTerm("");
-    setTempSearchTerm("");
     setDisplayDropdown(false);
   };
 
@@ -99,26 +90,6 @@ const Search = ({
         onKeyDown={(e) => handleKeyPress(e)}
         spellCheck={spellCheck}
       />
-      <div
-        className="icon-contaier"
-        style={{
-          width: width,
-          flex: 1,
-          display: "flex",
-          justifyContent: "flex-start",
-          paddingRight: "20px",
-        }}
-      >
-        <AiOutlineSearch
-          style={{
-            width: "25px",
-            height: "25px",
-            zIndex: 15,
-            cursor: "pointer",
-          }}
-          onClick={handleIconClick}
-        />
-      </div>
       {filteredOptions.length !== 0 &&
       searchTerm.length !== 0 &&
       displayDropdown ? (
